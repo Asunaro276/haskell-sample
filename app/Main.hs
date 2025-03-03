@@ -48,10 +48,64 @@ fib2 n
 --         b = 20
 --         c = add a b
 
-randAlpha = randomRIO ('a', 'z')
+-- 代数的データ型の例
+-- 列挙型
+-- data Color = Red | Green | Blue | Yellow deriving (Enum, Show)
+-- main = do
+--     print $ fromEnum Blue
+--     print $ fromEnum Yellow
+--     print $ fromEnum Red
+--     print $ fromEnum Green
+--     print (toEnum 0 :: Color)
+--     print (toEnum 1 :: Color)
+--     print (toEnum 2 :: Color)
+--     print (toEnum 3 :: Color)
+    
+-- 直積型
+data Point = Point Int Int deriving (Show)
+-- offset (Point x1 y1) (Point x2 y2) = Point (x1 + x2) (y1 + y2)
+-- main = do
+--     let p1 = Point 1 2
+--         p2 = Point 3 4
+--         p3 = offset p1 p2
+--     print p3
 
-main = do
-    r <- randAlpha
-    print r
+-- ex)
+data Rect = Rect Int Int Int Int deriving (Show)
+contains (Rect x y w h) (Point px py) = px >= x && px < x + w && py >= y && py < y + h
+-- main = do
+--     print $ contains (Rect 2 2 3 3) (Point 1 1)
+--     print $ contains (Rect 2 2 3 3) (Point 2 2)
+--     print $ contains (Rect 2 2 3 3) (Point 3 3)
+--     print $ contains (Rect 2 2 3 3) (Point 4 4)
+--     print $ contains (Rect 2 2 3 3) (Point 5 5)
 
-data Color = Red | Green | Blue | Yellow
+-- 直和型
+data Test = TestInt Int
+          | TestStr String
+          deriving Show
+
+foo (TestInt 1)   = "bar"
+foo (TestStr "1") = "baz"
+foo _             = "?"
+-- main = do
+--     print $ foo $ TestInt 0
+--     print $ foo $ TestInt 1
+--     print $ foo $ TestStr "0"
+--     print $ foo $ TestStr "1"
+
+data Shape = Rect Double Double
+
+area :: Shape -> Double
+area（Rect x y）= x * y
+
+main = print $ area（Rect 2 3）
+
+
+
+-- アクションの例
+-- randAlpha = randomRIO ('a', 'z')
+
+-- main = do
+--     r <- randAlpha
+--     print r
