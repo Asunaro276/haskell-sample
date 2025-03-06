@@ -94,14 +94,17 @@ foo _             = "?"
 --     print $ foo $ TestStr "0"
 --     print $ foo $ TestStr "1"
 
-data Shape = Rect Double Double
+-- data Shape = Rect Double Double
 
-area :: Shape -> Double
-area（Rect x y）= x * y
+-- area :: Shape -> Double
+-- area（Rect x y）= x * y
 
-main = print $ area（Rect 2 3）
+-- main = print $ area（Rect 2 3）
 
-
+-- data Foo = Foo { bar :: Int, baz :: String } deriving Show
+-- main = do
+--     print $ Foo { bar = 1, baz = "b" }
+--     print $ Foo 2 "b"
 
 -- アクションの例
 -- randAlpha = randomRIO ('a', 'z')
@@ -109,3 +112,18 @@ main = print $ area（Rect 2 3）
 -- main = do
 --     r <- randAlpha
 --     print r
+--     if r == 'z' then print "END" else main
+
+-- return
+-- main = do
+--     a <- return 1
+--     print a
+--     print =<< return 2
+--     return 3 >>= print
+
+dice :: IO Int
+dice = getStdRandom $ randomR (1, 6)
+
+main = do
+    print =<< dice
+    print =<< dice
