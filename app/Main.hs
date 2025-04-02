@@ -1,6 +1,7 @@
 module Main (main) where
 
 import System.Random
+import Data.List (sortOn)
 import Lib
 
 main :: IO ()
@@ -9,18 +10,18 @@ main :: IO ()
 -- x = 123 :: Int
 -- y = 234 :: Int
 -- main = print $ x + y
-add x y = x + y
-fact 0 = 1
-fact n = n * fact (n - 1)
-f 1 = "1"
-f a = "?"
-fib 0 = 0 
-fib 1 = 1
-fib n = fib (n - 1) + fib (n - 2)
-fib2 n
-    | n == 0 = 0
-    | n == 1 = 1
-    | n > 1 = fib2 (n - 1) + fib2 (n - 2)
+-- add x y = x + y
+-- fact 0 = 1
+-- fact n = n * fact (n - 1)
+-- f 1 = "1"
+-- f a = "?"
+-- fib 0 = 0 
+-- fib 1 = 1
+-- fib n = fib (n - 1) + fib (n - 2)
+-- fib2 n
+--     | n == 0 = 0
+--     | n == 1 = 1
+--     | n > 1 = fib2 (n - 1) + fib2 (n - 2)
 -- main = do
 --     print $ add 3 5
 --     print $ add 10 5
@@ -62,7 +63,7 @@ fib2 n
 --     print (toEnum 3 :: Color)
     
 -- 直積型
-data Point = Point Int Int deriving (Show)
+-- data Point = Point Int Int deriving (Show)
 -- offset (Point x1 y1) (Point x2 y2) = Point (x1 + x2) (y1 + y2)
 -- main = do
 --     let p1 = Point 1 2
@@ -71,8 +72,8 @@ data Point = Point Int Int deriving (Show)
 --     print p3
 
 -- ex)
-data Rect = Rect Int Int Int Int deriving (Show)
-contains (Rect x y w h) (Point px py) = px >= x && px < x + w && py >= y && py < y + h
+-- data Rect = Rect Int Int Int Int deriving (Show)
+-- contains (Rect x y w h) (Point px py) = px >= x && px < x + w && py >= y && py < y + h
 -- main = do
 --     print $ contains (Rect 2 2 3 3) (Point 1 1)
 --     print $ contains (Rect 2 2 3 3) (Point 2 2)
@@ -81,13 +82,13 @@ contains (Rect x y w h) (Point px py) = px >= x && px < x + w && py >= y && py <
 --     print $ contains (Rect 2 2 3 3) (Point 5 5)
 
 -- 直和型
-data Test = TestInt Int
-          | TestStr String
-          deriving Show
+-- data Test = TestInt Int
+--           | TestStr String
+--           deriving Show
 
-foo (TestInt 1)   = "bar"
-foo (TestStr "1") = "baz"
-foo _             = "?"
+-- foo (TestInt 1)   = "bar"
+-- foo (TestStr "1") = "baz"
+-- foo _             = "?"
 -- main = do
 --     print $ foo $ TestInt 0
 --     print $ foo $ TestInt 1
@@ -121,9 +122,32 @@ foo _             = "?"
 --     print =<< return 2
 --     return 3 >>= print
 
-dice :: IO Int
-dice = getStdRandom $ randomR (1, 6)
+-- dice :: IO Int
+-- dice = getStdRandom $ randomR (1, 6)
+
+-- main = do
+--     a <- return 1
+--     print =<< dice
+
+-- fact :: Int -> IO Int
+-- fact 0 = do
+--     return 1
+-- fact n | n > 0 = do
+--     a <- fact (n - 1)
+--     let result = n * a
+--     return result
+
+-- main = do
+--     result <- fact 5
+--     print $ result
+
+shuffle :: [a] -> IO [a]
+shuffle [] = return []
+shuffle xs = do
+    gen <- newStdGen
+    let pairs = zip (randoms gen :: [Int]) xs
+        sorted = map snd $ sortOn fst pairs
+    return sorted
 
 main = do
-    print =<< dice
-    print =<< dice
+    print =<< shuffle [1..9]
