@@ -141,13 +141,24 @@ main :: IO ()
 --     result <- fact 5
 --     print $ result
 
-shuffle :: [a] -> IO [a]
-shuffle [] = return []
-shuffle xs = do
-    gen <- newStdGen
-    let pairs = zip (randoms gen :: [Int]) xs
-        sorted = map snd $ sortOn fst pairs
-    return sorted
+-- shuffle :: [a] -> IO [a]
+-- shuffle [] = return []
+-- shuffle xs = do
+--     gen <- newStdGen
+--     let pairs = zip (randoms gen :: [Int]) xs
+--         sorted = map snd $ sortOn fst pairs
+--     return sorted
+
+-- main = do
+--     print =<< shuffle [1..9]
+
+showDice :: IO Int
+showDice = do
+    a <- getStdRandom $ randomR (1, 6)
+    print a
+    return a
 
 main = do
-    print =<< shuffle [1..9]
+    showDice
+    showDice
+    print =<< showDice
