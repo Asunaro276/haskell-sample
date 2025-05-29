@@ -1,10 +1,12 @@
 module Main (main) where
 
-import System.Random
 import Data.List (sortOn)
 import Lib
+import System.Random
 
 main :: IO ()
+main = someFunc
+
 -- main = someFunc
 -- main = putStrLn "Hello world!"
 -- x = 123 :: Int
@@ -15,7 +17,7 @@ main :: IO ()
 -- fact n = n * fact (n - 1)
 -- f 1 = "1"
 -- f a = "?"
--- fib 0 = 0 
+-- fib 0 = 0
 -- fib 1 = 1
 -- fib n = fib (n - 1) + fib (n - 2)
 -- fib2 n
@@ -61,7 +63,7 @@ main :: IO ()
 --     print (toEnum 1 :: Color)
 --     print (toEnum 2 :: Color)
 --     print (toEnum 3 :: Color)
-    
+
 -- 直積型
 -- data Point = Point Int Int deriving (Show)
 -- offset (Point x1 y1) (Point x2 y2) = Point (x1 + x2) (y1 + y2)
@@ -152,13 +154,13 @@ main :: IO ()
 -- main = do
 --     print =<< shuffle [1..9]
 
-showDice :: IO Int
-showDice = do
-    a <- getStdRandom $ randomR (1, 6)
-    print a
-    return a
+-- showDice :: IO Int
+-- showDice = do
+--     a <- getStdRandom $ randomR (1, 6)
+--     print a
+--     return a
 
-main = do
-    showDice
-    showDice
-    print =<< showDice
+-- main = do
+--     showDice
+--     showDice
+--     print =<< showDice

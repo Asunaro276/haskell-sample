@@ -1,2 +1,5 @@
+import qualified RandomSpec
+import Test.Hspec (hspec)
+
 main :: IO ()
-main = putStrLn "Test suite not yet implemented"
+main = hspec RandomSpec.spec
