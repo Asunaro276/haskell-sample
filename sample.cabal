@@ -26,6 +26,7 @@ source-repository head
 library
   exposed-modules:
       Geometry
+      IoMonad
       Lib
       Math
       Random
@@ -60,6 +61,7 @@ test-suite sample-test
   type: exitcode-stdio-1.0
   main-is: Spec.hs
   other-modules:
+      IoMonadSpec
       RandomSpec
       Paths_sample
   autogen-modules:
