@@ -1,10 +1,13 @@
-module IoMonad (dice, hello1) where
+{-# LANGUAGE UnboxedTuples #-}
+
+module IoMonad (dice, addsub, sample) where
 
 import System.Random
-import GHC.Base (unIO)
+import GHC.IO (IO(..))
 
 dice :: IO Int
 dice = getStdRandom $ randomR (1, 6)
 
-hello1 :: IO Int
-hello1 = unIO $ return 1
+addsub x y = (# x + y, x - y #)
+
+sample = IO $ \s -> (# s, 1 #)
